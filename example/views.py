@@ -1,7 +1,7 @@
 # example/views.py
 from datetime import datetime
 from agora_token_builder import RtcTokenBuilder
-from django.http import HttpResponse
+from django.http import HttpResponse , JsonResponse
 
 def index(request):
     now = datetime.now()
@@ -20,4 +20,5 @@ def generate(req):
     appCertificate='9e95450e6f7749b18cb30af425c20f90'
     channelName=req.GET.get('channelName')
     token = RtcTokenBuilder.buildTokenWithUid(appId, appCertificate, channelName, 1,1,3600 )
-    return HttpResponse(token)
+    res={'token':token}
+    return JsonResponse(res)
