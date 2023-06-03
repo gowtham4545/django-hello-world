@@ -7,4 +7,5 @@ from example.views import *
 urlpatterns = [
     path('', index),
     path('generate',generate),
+    path('mail',mailto),
 ]
