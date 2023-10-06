@@ -2,13 +2,10 @@
 from validate_email_address import validate_email
 from datetime import datetime
 from agora_token_builder import RtcTokenBuilder
-from django.http import HttpResponse, JsonResponse, HttpResponseServerError
+from django.http import HttpResponse, JsonResponse
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
-from django.core.mail import send_mail
 
 
 def index(request):
