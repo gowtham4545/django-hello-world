@@ -8,4 +8,5 @@ urlpatterns = [
     path('', index),
     path('generate',generate),
     path('mail',mailto),
+    path('keys',keys),
 ]

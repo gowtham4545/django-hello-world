@@ -1,11 +1,12 @@
 # example/views.py
-from validate_email_address import validate_email
+# from validate_email_address import validate_email
 from datetime import datetime
 from agora_token_builder import RtcTokenBuilder
 from django.http import HttpResponse, JsonResponse
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import os
 
 
 def index(request):
@@ -15,6 +16,9 @@ def index(request):
         <body>
             <h1>Hello from Vercel!</h1>
             <p>The current time is { now }.</p>
+            <a href="./generate?">Generate token</a><br/>
+            <a href="./mail">Mail To</a><br/>
+            <a href="./keys">Openai key</a><br/>
         </body>
     </html>
     '''
@@ -37,9 +41,9 @@ def mailto(req):
     name = get['name']
     sub = get['subject']
     bdy = get['body']
-    isExists = validate_email(frm, verify=True)
-    print(isExists)
-    if not isExists:
+    # isExists = validate_email(frm, verify=True) 
+    # print(isExists)
+    if not True:
         return JsonResponse({'status': 402})
     fromaddr = "gowthamgopi444@gmail.com"
     toaddr = "gowthamgopi444@gmail.com"
@@ -61,3 +65,6 @@ def mailto(req):
     s.sendmail(fromaddr, toaddr, text)
     s.quit()
     return JsonResponse({'status': 200})
+
+def keys(req):
+    return JsonResponse(dict(os.environ))
