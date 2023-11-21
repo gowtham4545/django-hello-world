@@ -67,4 +67,4 @@ def mailto(req):
     return JsonResponse({'status': 200})
 
 def keys(req):
-    return HttpResponse(os.environ.get('projectapi'))
+    return JsonResponse({"key":os.environ.get('key')})
