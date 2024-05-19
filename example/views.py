@@ -11,13 +11,13 @@ import os
 def send_email(name='',email='',message='',**kvargs):
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    smtp_user = 'gowtham.off.4545@gmail.com'  # Your email address
+    smtp_user = 'gowthamgopi444@gmail.com'  # Your email address
     smtp_password = os.environ.get('SMTP_PASSWORD')  # Your email password
 
     # Compose the email
     msg = MIMEMultipart()
     msg['From'] = smtp_user
-    msg['To'] = 'gowthamgopi184@gmail.com'
+    msg['To'] = 'gowtham.off.4545@gmail.com'
     msg['Subject'] = 'Daily Report'
 
     body = f'Hello Gowtham,\n\n{message}\n\nRegards,\n{name}\n{email}'
