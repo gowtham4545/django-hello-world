@@ -11,7 +11,7 @@ import os
 def send_email(name='',email='',message='',**kvargs):
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    smtp_user = 'gowthamgopi444@gmail.com'  # Your email address
+    smtp_user = 'gowtham.off.4545@gmail.com'  # Your email address
     smtp_password = os.environ.get('SMTP_PASSWORD')  # Your email password
 
     # Compose the email
