@@ -57,14 +57,13 @@ def generate(req):
     res = {'token': token}
     return JsonResponse(res)
 
-
 def mailto(req):
     try:
-        name=req.GET['name']
-        email=req.GET['email']
-        content=req.GET['message']
+        name=req.GET.get('name')
+        email=req.GET.get('email')
+        content=req.GET.get('message')
         send_email(name,email,content)
-        return HttpResponse(status=400)
+        return HttpResponse(status=200)
     except Exception as e:
         return JsonResponse({"Error":e})
 
