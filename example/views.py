@@ -8,6 +8,34 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
 
+def send_email(name='',email='',message='',**kvargs):
+    smtp_server = 'smtp.gmail.com'
+    smtp_port = 587
+    smtp_user = 'gowthamgopi444@gmail.com'  # Your email address
+    smtp_password = os.environ.get('SMTP_PASSWORD')  # Your email password
+
+    # Compose the email
+    msg = MIMEMultipart()
+    msg['From'] = smtp_user
+    msg['To'] = 'gowthamgopi184@gmail.com'
+    msg['Subject'] = 'Daily Report'
+
+    body = f'Hello Gowtham,\n\n{message}\n\nRegards,\n{name}\n{email}'
+
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        # Send the email
+        server = smtplib.SMTP(smtp_server, smtp_port)  # Update with your SMTP server and port
+        server.starttls()
+        server.login(smtp_user, smtp_password)  # Update with your email and password
+        server.send_message(msg)
+        print(f"Email sent successfully to {msg['To']}")
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+    finally:
+        # Close the SMTP server
+        server.quit()
 
 def index(request):
     now = datetime.now()
@@ -36,35 +64,14 @@ def generate(req):
 
 
 def mailto(req):
-    get = req.GET
-    frm = get['id']
-    name = get['name']
-    sub = get['subject']
-    bdy = get['body']
-    # isExists = validate_email(frm, verify=True) 
-    # print(isExists)
-    if not True:
-        return JsonResponse({'status': 402})
-    fromaddr = "gowthamgopi444@gmail.com"
-    toaddr = "gowthamgopi444@gmail.com"
-    msg = MIMEMultipart()
-    msg['From'] = frm
-    msg['To'] = toaddr
-    msg['Subject'] = sub
-    body = f'''
-        From : {frm}
-        Name : {name}
-
-        {bdy}
-    '''
-    msg.attach(MIMEText(body, 'plain'))
-    s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.starttls()
-    s.login(fromaddr, 'gouanborkddpapcp')
-    text = msg.as_string()
-    s.sendmail(fromaddr, toaddr, text)
-    s.quit()
-    return JsonResponse({'status': 200})
+    try:
+        name=req.GET['name']
+        email=req.GET['email']
+        content=req.GET['message']
+        send_email(name,email,content)
+        return HttpResponse(status=400)
+    except:
+        return HttpResponse(status=400)
 
 def keys(req):
     return JsonResponse({"key":os.environ.get('key')})
