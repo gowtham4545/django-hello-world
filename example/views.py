@@ -24,18 +24,13 @@ def send_email(name='',email='',message='',**kvargs):
 
     msg.attach(MIMEText(body, 'plain'))
 
-    try:
-        # Send the email
-        server = smtplib.SMTP(smtp_server, smtp_port)  # Update with your SMTP server and port
-        server.starttls()
-        server.login(smtp_user, smtp_password)  # Update with your email and password
-        server.send_message(msg)
-        print(f"Email sent successfully to {msg['To']}")
-    except Exception as e:
-        print(f"Failed to send email: {e}")
-    finally:
-        # Close the SMTP server
-        server.quit()
+    # Send the email
+    server = smtplib.SMTP(smtp_server, smtp_port)  # Update with your SMTP server and port
+    server.starttls()
+    server.login(smtp_user, smtp_password)  # Update with your email and password
+    server.send_message(msg)
+    # Close the SMTP server
+    server.quit()
 
 def index(request):
     now = datetime.now()
@@ -70,8 +65,8 @@ def mailto(req):
         content=req.GET['message']
         send_email(name,email,content)
         return HttpResponse(status=400)
-    except:
-        return HttpResponse(status=400)
+    except Exception as e:
+        return JsonResponse({"Error":e})
 
 def keys(req):
     return JsonResponse({"key":os.environ.get('key')})
