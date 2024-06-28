@@ -60,7 +60,11 @@ def mailto(req):
         name = req.GET.get('name')
         email = req.GET.get('email')
         content = req.GET.get('message')
-        send_email(name, email, content)
+        topic = req.GET.get('subject')
+        if topic:
+            send_email(name, email, content, topic)
+        else:
+            send_email(name, email, content)
         return HttpResponse(status=200)
     except Exception as e:
         return JsonResponse({"Error": e})
