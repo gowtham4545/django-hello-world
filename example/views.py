@@ -65,9 +65,12 @@ def mailto(req):
             send_email(name, email, content, topic)
         else:
             send_email(name, email, content)
-        return HttpResponse(status=200)
+        return JsonResponse({"status": 0})
     except Exception as e:
-        return JsonResponse({"Error": e})
+        return JsonResponse({
+            "status":1,
+            "error": str(e)
+        })
 
 
 def keys(req):
