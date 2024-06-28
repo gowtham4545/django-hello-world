@@ -1,5 +1,3 @@
-# example/views.py
-# from validate_email_address import validate_email
 from datetime import datetime
 from agora_token_builder import RtcTokenBuilder
 from django.http import HttpResponse, JsonResponse
@@ -8,29 +6,28 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
 
-def send_email(name='',email='',message='',**kvargs):
+
+def send_email(name='', email='', message='', subject='Redirected Mail', **kvargs):
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    smtp_user = 'gowthamgopi444@gmail.com'  # Your email address
-    smtp_password = os.environ.get('SMTP_PASSWORD')  # Your email password
+    smtp_user = 'gowthamgopi444@gmail.com'
+    smtp_password = os.environ.get('SMTP_PASSWORD')
 
-    # Compose the email
     msg = MIMEMultipart()
     msg['From'] = smtp_user
     msg['To'] = 'gowtham.off.4545@gmail.com'
-    msg['Subject'] = 'Daily Report'
+    msg['Subject'] = subject
 
-    body = f'Hello Gowtham,\n\n{message}\n\nRegards,\n{name}\n{email}'
+    body = f'{message}\n\nRegards,\n{name}\n{email}'
 
     msg.attach(MIMEText(body, 'plain'))
 
-    # Send the email
-    server = smtplib.SMTP(smtp_server, smtp_port)  # Update with your SMTP server and port
+    server = smtplib.SMTP(smtp_server, smtp_port)
     server.starttls()
-    server.login(smtp_user, smtp_password)  # Update with your email and password
+    server.login(smtp_user, smtp_password)
     server.send_message(msg)
-    # Close the SMTP server
     server.quit()
+
 
 def index(request):
     now = datetime.now()
@@ -57,15 +54,17 @@ def generate(req):
     res = {'token': token}
     return JsonResponse(res)
 
+
 def mailto(req):
     try:
-        name=req.GET.get('name')
-        email=req.GET.get('email')
-        content=req.GET.get('message')
-        send_email(name,email,content)
+        name = req.GET.get('name')
+        email = req.GET.get('email')
+        content = req.GET.get('message')
+        send_email(name, email, content)
         return HttpResponse(status=200)
     except Exception as e:
-        return JsonResponse({"Error":e})
+        return JsonResponse({"Error": e})
+
 
 def keys(req):
-    return JsonResponse({"key":os.environ.get('key')})
+    return JsonResponse({"key": os.environ.get('key')})
