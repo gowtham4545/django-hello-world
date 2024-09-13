@@ -2,9 +2,9 @@
 
 *Just a waste dump*
 
-
-|    Application Layer   |  (HTTP, FTP, SMTP)  |
+|       _**Layers**_     |     _**Protocols**_ |
 |:----------------------:|:-------------------:|
+|    Application Layer   |  (HTTP, FTP, SMTP)  |
 |    Presentation Layer  |  (SSL, TLS)         |
 |      Session Layer     |  (NetBIOS, RPC)     |
 |     Transport Layer    |  (TCP, UDP)         |
