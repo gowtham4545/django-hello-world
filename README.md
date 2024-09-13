@@ -12,3 +12,5 @@
 |     Data Link Layer    |  (Ethernet, Wi-Fi)  |
 |     Physical Layer     |  (Cables, Hubs)     |
 
+https://gist.github.com/gowtham4545/8bb9140bacb6141b5d63ffefc1a101d8
+
