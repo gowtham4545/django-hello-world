@@ -44,3 +44,7 @@ Associate SW Systems Engineer @ Extreme Networks. <br/>Ex-Intern @ Juniper Netwo
 
 
 [![](https://visitcount.itsvg.in/api?id=gowtham4545&label=Profile%20Views&color=1&icon=5&pretty=true)](https://visitcount.itsvg.in) 
+
+
+**A stock fetching api**
+![](./finnhub.png)
